@@ -44,11 +44,11 @@ public class TestBase {
     }
 
     public void type(By locator, String text) {
-        click(locator);
-        //clear
-        driver.findElement(locator).clear();
-        //send
-        driver.findElement(locator).sendKeys(text);
+        if (text != null) {
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
     }
 
     public void click(By locator) {
@@ -73,9 +73,9 @@ public class TestBase {
         click(By.name("registration"));
     }
 
-    public void fillLoginRegisterForm(String email, String password) {
-        type(By.name("email"), email);
-        type(By.name("password"), password);
+    public void fillLoginRegisterForm(User user) {
+        type(By.name("email"), user.getEmail());
+        type(By.name("password"), user.getPassword());
     }
 
     public void clickOnLoginLink() {
@@ -90,14 +90,13 @@ public class TestBase {
         click(By.cssSelector(".add_form__2rsm2 button"));
     }
 
-    public void fillAddContactForm(String name, String lastName, String phone,
-                                   String email, String address, String description) {
-        type(By.xpath("//input[1]"), name);
-        type(By.xpath("//input[2]"), lastName);
-        type(By.xpath("//input[3]"), phone);
-        type(By.xpath("//input[4]"), email);
-        type(By.xpath("//input[5]"), address);
-        type(By.xpath("//input[6]"), description);
+    public void fillAddContactForm(Contact contact) {
+        type(By.xpath("//input[1]"), contact.getName());
+        type(By.xpath("//input[2]"), contact.getLastName());
+        type(By.xpath("//input[3]"), contact.getPhone());
+        type(By.xpath("//input[4]"), contact.getEmail());
+        type(By.xpath("//input[5]"), contact.getAddress());
+        type(By.xpath("//input[6]"), contact.getDescription());
     }
 
     public void clickOnAddLink() {
@@ -118,4 +117,20 @@ public class TestBase {
         click(By.cssSelector(".contact-item_card__2SOIM"));
         click(By.xpath("//button[.='Remove']"));
     }
+
+    public void  pause(int millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int sizeOfContacts() {
+            if (isElementPresent(By.cssSelector(".contact-item_card__2SOIM"))){
+                return driver.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
+            }
+        return 0;
+
+        }
 }

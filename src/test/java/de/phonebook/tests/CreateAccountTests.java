@@ -9,7 +9,9 @@ public class CreateAccountTests extends TestBase{
     public void newUserRegisterPositiveTest(){
 
         clickOnLoginLink();
-        fillLoginRegisterForm("kristitomash080@gmail.com", "Aa12345!");
+        fillLoginRegisterForm(new User()
+                .setEmail("kristitomash080@gmail.com")
+                .setPassword("Aa12345!"));
         clickOnRegistrationButton();
         Assert.assertTrue(isSignOutButtonPresent());
     }
@@ -17,7 +19,9 @@ public class CreateAccountTests extends TestBase{
     @Test
     public void existedUserRegisterNegativeTest(){
         clickOnLoginLink();
-        fillLoginRegisterForm("kristitomash080@gmail.com", "Aa12345!");
+        fillLoginRegisterForm(new User()
+                .setEmail("kristitomash080@gmail.com")
+                .setPassword("Aa12345!"));
         clickOnRegistrationButton();
         Assert.assertTrue(isAlertPresent());
 

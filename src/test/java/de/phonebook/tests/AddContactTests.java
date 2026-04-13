@@ -11,15 +11,23 @@ public class AddContactTests extends TestBase{
         @BeforeMethod
     public void precondition(){
             clickOnLoginLink();
-            fillLoginRegisterForm("kristitomash080@gmail.com", "Aa12345!");
+            fillLoginRegisterForm(new User()
+                    .setEmail("kristitomash080@gmail.com")
+                    .setPassword("Aa12345!"));
             clickOnLoginButton();
         }
 @Test
     public void addContactPositiveTest(){
 
     clickOnAddLink();
-    fillAddContactForm("Kristina", "Tomash", "1234567890",
-            "Test@gm.com", "Berlin", "QA");
+    fillAddContactForm(
+            new Contact()
+                    .setName("Kristina")
+                    .setLastName("Tomash")
+                    .setPhone("1234567890")
+                    .setEmail("Test@gm.com")
+                    .setAddress("Berlin")
+                    .setDescription("QA"));
     clickOnSaveButton();
     //assert by name(text)
     Assert.assertTrue(verifyByName("Kristina"));
