@@ -1,8 +1,13 @@
 package de.phonebook.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class AddContactTests extends TestBase{
         //before -log in
@@ -31,10 +36,29 @@ public class AddContactTests extends TestBase{
     type(By.xpath("//input[6]"),"QA");
     //save button
     click(By.cssSelector(".add_form__2rsm2 button"));
+    //assert by name(text)
+    Assert.assertTrue(verifyByName("Kristina"));
+
 }
 
+    public boolean verifyByName(String text) {
+        List<WebElement> contacts = driver.findElements(By.cssSelector("h2"));
+        for (WebElement element: contacts){
+            if (element.getText().contains(text))
+                return true;
+        }
+        return false;
+    }
+    @AfterMethod
+    public void postConditions(){
+            //click on card
+            click(By.cssSelector(".contact-item_card__2SOIM"));
+            //click on remove button
+            click(By.xpath("//button[.='Remove']"));
 
-    //assert by name(text)
+
+    }
+
 
 
 }
