@@ -31,13 +31,23 @@ public class RemoveContactTests extends TestBase{
     click(By.cssSelector(".contact-item_card__2SOIM"));
     //click on Remove button
     click(By.xpath("//button[.='Remove']"));
+    pause(1000);
     int sizeAfter = sizeOfContacts();
     //assert
     Assert.assertEquals(sizeAfter,sizeBefore-1);
 }
+
+public void  pause(int millis){
+    try {
+        Thread.sleep(millis);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+}
+
     public int sizeOfContacts() {
         if (isElementPresent(By.cssSelector(".contact-item_card__2SOIM"))){
-            driver.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
+            return driver.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
         }
     return 0;
 
