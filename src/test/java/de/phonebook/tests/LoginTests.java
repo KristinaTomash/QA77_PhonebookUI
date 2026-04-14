@@ -1,28 +1,30 @@
 package de.phonebook.tests;
 
+import de.phonebook.core.TestBase;
+import de.phonebook.model.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTests extends TestBase{
+public class LoginTests extends TestBase {
 
     @Test
     public void loginRegisteredUserPositiveTest(){
-        app.clickOnLoginLink();
-        app.fillLoginRegisterForm(new User()
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillLoginRegisterForm(new User()
                 .setEmail("kristitomash080@gmail.com")
                 .setPassword("Aa12345!"));
-        app.clickOnLoginButton();
-        Assert.assertTrue(app.isSignOutButtonPresent());
+        app.getUser().clickOnLoginButton();
+        Assert.assertTrue(app.getUser().isSignOutButtonPresent());
 
     }
 
     @Test
     public void loginRegisteredUserWithoutEmailNegativeTest(){
-        app.clickOnLoginLink();
-        app.fillLoginRegisterForm(new User()
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillLoginRegisterForm(new User()
                 .setPassword("Aa12345!"));
-        app.clickOnLoginButton();
-        Assert.assertTrue(app.isAlertPresent());
+        app.getUser().clickOnLoginButton();
+        Assert.assertTrue(app.getUser().isAlertPresent());
 
     }
 
