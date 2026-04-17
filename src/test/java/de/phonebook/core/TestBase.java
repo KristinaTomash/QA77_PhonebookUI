@@ -33,6 +33,7 @@ public class TestBase {
     public void startTest(Method method,Object[] p){
     logger.info("Start test {} with data: {}",method.getName(), Arrays.asList(p));
     }
+
     @AfterMethod
     public void stopTest(ITestResult result){
     if (result.isSuccess()){
